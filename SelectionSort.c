@@ -7,20 +7,25 @@ int main(){
 }
 
 void SelectionSort(int T[], int n){
-	int index_min = 0;
-	int k = 0;
-	while(k < 7){
-		for(int i = 1;i < n;i++){
-			if(T[index_min] > T[i]){
-				index_min = i;
+	int index_min,i,j;
+
+for(i = 0; i < n-1; i++){//sterowanie iteracjami
+	index_min = i;
+			for(j = i+1;j < n;j++){//znajdowanie indexu najmniejszego elementu
+			if(T[j-1] > T[j]){
+				index_min = j;
+			
 			}
-		}
-	if(k != index_min)
-		swap(&T[k],&T[index_min]);
-	k++;
-	}
+	
+			swap(&T[i],&T[index_min]);//zamiana (i,index_min)
+
 }
 
+	
+	
+
+}
+}
 void swap(int *x, int *y){
 	int temp;
 	temp = *y;
