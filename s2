@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 20
+int main(void)
+{
+	FILE * dane;
+	FILE * rewers;
+	if((dane = fopen("DANE.BIN","rb"))==NULL)
+		printf("Nie udalo sie otworzyc pliku DANE.BIN :X");
+	if((rewers = fopen("REWERS.BIN","w+b"))==NULL)
+		printf("Nie udalo sie otworzyc pliku REWERS.BIN :X");
+	
+	double *magazine,*mag;
+	magazine = (double *) malloc(20 * sizeof(double));
+	mag = (double *) malloc(20 * sizeof(double));
+	//rewind(dane);
+	fread(magazine,sizeof(double)*20,1,dane);
+	for(int i = 0; i < N; i++)
+    {
+        printf("%.2f\n",magazine[i]);
+    }
+	printf("------------------------------------------------\n");
+	fwrite(magazine,sizeof(double)*N,1,rewers);
+	rewind(rewers);
+	int k = 19;int temp;
+	for(int i = 0; i <= k; i++)
+	{
+		;
+	}
+	
+	//fread(mag,sizeof(double)*20,1,rewers);
+	//rewind(rewers);
+	for(int i = 0; i < N; i++)
+    {
+        printf("%.2f\n",mag[i]);
+    }
+	return 0;
+}
+
