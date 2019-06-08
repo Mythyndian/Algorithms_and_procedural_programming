@@ -37,15 +37,19 @@ int main()
 
 	}
 
-    fwrite(p,sizeof(struct wektor),1,plik);
+
+    fwrite(p,sizeof(struct wektor)*20,1,plik);
+
+
+
+	qsort(p,20,sizeof(struct wektor)*20,comp);
+printf("---------------------------------------\n");
+	//rewind(plik);
+	fwrite(p,sizeof(struct wektor)*20,1,plik);
 
 	rewind(plik);
 
-	qsort(p,20,sizeof(struct wektor),comp);
-
-	fwrite(p,sizeof(struct wektor),1,plik);
-
-	fread(p,sizeof(struct wektor),1,plik);
+	fread(p,sizeof(struct wektor)*20,1,plik);
 
     	for(int i = 0; i < 20; i++)
 	{
@@ -60,12 +64,16 @@ int main()
 
 int comp(const void * p1, const void * p2)
 {
-    struct wektor *w1 = (struct wektor*)p1;
-	struct wektor *w2 = (struct wektor*)p2;
-	if(sqrt((p1->x,2)+(p1->y,2)+(p1->z,2)) == sqrt((p2->x,2)+(p2->y,2)+(p2->z,2)))
+
+    const struct  wektor *w1 = (struct wektor *)p1;
+    const struct  wektor *w2 = (struct wektor *)p2;
+	float s1 = sqrt((w1->x,2)+(w1->y,2)+(w1->z,2));
+    float s2 = sqrt((w2->x,2)+(w2->y,2)+(w2->z,2));
+	if(s1 == s2)
 		return 0;
-	else if((sqrt((p1->x,2)+(p1->y,2)+(p1->z,2))) < (sqrt((p2->x,2)+(p2->y,2)+(p2->z,2))))
+	else if(s1 < s2)
 		return -1;
-else
-    return 1;
+    else
+        return 1;
 }
+
